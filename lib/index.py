@@ -69,10 +69,6 @@ def parse_note(filepath: str, all_note_titles: List[str]) -> List[Document]:
             "frontmatter": frontmatter,
         }
         documents.append(Document(text=chunk["content"], metadata=metadata))
-        print(f"Processed chunk: {chunk['heading'] or 'No Heading'}")
-        print(f"content: {chunk['content'][:50]}...")
-        print(f"document metadata: {metadata}")
-        print(f"document: {documents[-1]}\n")
     return documents
 
 
