@@ -2230,6 +2230,7 @@ dependencies = [
     { name = "gradio", version = "5.32.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
     { name = "llama-index" },
     { name = "llama-index-embeddings-huggingface" },
+    { name = "llama-index-llms-openai" },
     { name = "sentence-transformers" },
 ]
 
@@ -2239,6 +2240,7 @@ requires-dist = [
     { name = "gradio", specifier = ">=4.44.1" },
     { name = "llama-index", specifier = ">=0.12.40" },
     { name = "llama-index-embeddings-huggingface", specifier = ">=0.5.4" },
+    { name = "llama-index-llms-openai", specifier = ">=0.4.2" },
     { name = "sentence-transformers", specifier = ">=4.1.0" },
 ]
 

@@ -17,13 +17,15 @@ def main():
 
     notes_files = list_notes_paths(notes_dir)
 
-    index_save_path = "./obsidian_index"
+    index_path = os.getenv("INDEX_DIR")
+    if not index_path:
+        raise ValueError("Environment variable 'INDEX_DIR' is not set.")
 
-    if not os.path.exists(index_save_path):
-        os.makedirs(index_save_path)
+    if not os.path.exists(index_path):
+        os.makedirs(index_path)
 
     index = build_index(notes_files)
-    index.storage_context.persist(persist_dir=index_save_path)
+    index.storage_context.persist(persist_dir=index_path)
 
 
 if __name__ == "__main__":
