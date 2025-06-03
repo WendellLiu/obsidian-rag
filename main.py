@@ -1,6 +1,7 @@
 import os
 
 from lib.files import list_notes_paths
+from lib.index import build_index
 
 
 def main():
@@ -16,9 +17,7 @@ def main():
 
     notes_files = list_notes_paths(notes_dir)
 
-    # print path name from notes_files
-    for file in notes_files:
-        print(file)
+    build_index(notes_files)
 
     index_save_path = "./obsidian_index"
 
