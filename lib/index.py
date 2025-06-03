@@ -2,15 +2,16 @@ import os
 import re
 import yaml
 from typing import List, Dict, Any
-from llama_index.core import VectorStoreIndex, Document, ServiceContext
+from llama_index.core import VectorStoreIndex, Document, Settings
 
-# from llama_index.embeddings import SentenceTransformerEmbedding
-#
-# # Set up embedding model (multilingual)
-# embed_model = SentenceTransformerEmbedding(
-#     model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
-# )
-# service_context = ServiceContext.from_defaults(embed_model=embed_model)
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+
+# Set up embedding model (multilingual)
+embed_model = HuggingFaceEmbedding(
+    model_name="nomic-ai/nomic-embed-text-v2-moe", trust_remote_code=True
+)
+
+Settings.embed_model = embed_model
 
 
 def extract_yaml_frontmatter(text: str) -> Dict[str, Any]:
@@ -89,6 +90,5 @@ def build_index(notes_paths: List[str]):
         docs = parse_note(file_path, all_note_titles)
         all_docs.extend(docs)
 
-    # index = VectorStoreIndex.from_documents(all_docs, service_context=service_context)
-    # index.storage_context.persist(persist_dir=index_save_path)
-    # print(f"Index built and saved to {index_save_path}")
+    index = VectorStoreIndex.from_documents(all_docs, show_progress=True)
+    return index
